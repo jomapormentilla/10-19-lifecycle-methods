@@ -30,6 +30,12 @@ class App extends React.Component{
     }), () => console.log(this.state) )
   }
 
+  addToItems = (item) => {
+    this.setState((prevState) => {
+        return { items: [...prevState.items, item] };
+    });
+  };
+
   // LCM can ONLY be used in a class component 
   componentDidMount(){
     // typcially fetch requests happen in a componentDidMount
@@ -48,7 +54,7 @@ class App extends React.Component{
     return (
       <div className="App">
         <Header changePage={this.changePage} />
-        {this.state.page === "items" ? <ItemsContainer  addToCart={this.addToCart} items={this.state.items} cart={this.state.cart}/> : <CartContainer cart={this.state.cart}/>}
+        {this.state.page === "items" ? <ItemsContainer  addToCart={this.addToCart} addToItems={this.addToItems} items={this.state.items} cart={this.state.cart}/> : <CartContainer cart={this.state.cart}/>}
       </div>
     );
   }

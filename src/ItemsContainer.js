@@ -1,6 +1,10 @@
 import React from 'react'
 import Item from './Item'
+import ItemForm from './ItemForm'
 import FilterBar from './FilterBar'
+
+import { connect } from 'react-redux'
+import { getItemsFetch } from './actions/itemActions'
 
 class ItemsContainer extends React.Component {
 
@@ -10,6 +14,7 @@ class ItemsContainer extends React.Component {
 
     componentDidMount(){
         console.log("Items Container mounted")
+        this.props.getItemsFetch()
       }
 
     filterItems = (e) => {
@@ -29,10 +34,17 @@ class ItemsContainer extends React.Component {
         return(
             <div id="ItemsContainer">
               <FilterBar filterItems={this.filterItems} />
+              <ItemForm addToItems={this.props.addToItems} />
               { this.displayItems()}
             </div>
         )
     }
 }
 
-export default ItemsContainer
+const mapStateToProps = state => {
+  return {
+    items: state.items
+  }
+}
+
+export default connect(mapStateToProps, { getItemsFetch })(ItemsContainer)

@@ -16,7 +16,7 @@ class Item extends React.Component {
         // FALSE => skipds the re-render
 
         // the item was not in the props.cart but IS in the nextProps.cart
-        return (!this.isInCart() && !!nextProps.cart.find(item => item.id === this.props.id)) || this.state != nextState
+        return (!this.isInCart() && !!nextProps.cart.find(item => item.id === this.props.id)) || this.state !== nextState
     }
 
     componentDidUpdate(){
